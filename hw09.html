@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=EUC-KR" http-equiv="content-type">
+    <script>
+      // (1) ==================================
+      function myFocus(x) {
+		x.style.backgroundColor = "yellow";
+      }
+	  function myBlur(x){
+		x.style.backgroundColor = "white";
+	  }
+      // (2) ==================================
+      function lightSwitch() {
+		if(document.getElementById("mybolb").src == "http://www.w3schools.com/js/bulboff.gif"){
+			document.getElementById("mybolb").src = "http://www.w3schools.com/js/bulbon.gif";
+		}
+		else{
+			document.getElementById("mybolb").src = "http://www.w3schools.com/js/bulboff.gif";
+		}
+      }
+      // (3) ==================================
+      function myText(x) {
+		document.getElementById("textColor").innerHTML = x.value;
+		var a = document.getElementById("testArea").querySelectorAll("b");
+		var i;
+
+		for(i=0; i<a.length; i++){
+			a[i].style.color = x.value;
+		}
+		console.log(a);
+      }
+      function myBackground(x) {
+		document.getElementById("bgColor").innerHTML = x.value;
+		document.getElementById("testArea").style.backgroundColor = x.value;
+      }
+      // (4) ==================================
+      function myLotto() {
+		var num;
+		var i;
+		var text = "";
+
+		for(i=0; i<6; i++){
+			num = (Math.random() * 45) + 1;
+			text = text + Math.floor(num) + " , ";
+		}
+		document.getElementById("lotto").innerHTML = text;
+      }
+      // (5) ==================================
+      function mOver(obj) {
+		obj.innerHTML = "<b>O.K. Good Job!</b>"
+		obj.style.backgroundColor = "lightgreen";
+      }
+      function mOut(obj) {
+		obj.innerHTML = "<b>Mouse Over Me</b>"
+		obj.style.backgroundColor = "lightpink";
+      }
+      // (6) ==================================
+      function calculate() {
+		var Subtotal = document.getElementById("subtotal").value;
+		var a = parseFloat(Subtotal);
+
+		var Tip = document.getElementById("tip").value;
+		var b = parseFloat(Tip);
+
+		var total = a + (a*(b/100));
+		document.getElementById("total").innerHTML = "$" + total ;
+      }
+      // (7) ======================================
+      function go() {
+		var sec = document.getElementById("sec").value;
+		sec--;
+		document.getElementById("sec").value = sec;
+		if(sec==-1){
+			document.getElementById("sec").value = 0;
+			clearInterval(timer);
+			alert("wake up!!!");
+		}
+      }
+      function tick() {
+		if(!sec.value){
+			clearInterval(timer);
+		}
+		else{
+			timer = setInterval(go,1000);
+		}
+      }
+      // (8) ==================================
+      function convert() {
+		mode = document.getElementById("convert").value;
+		weight = document.getElementById("weight").value;
+
+		if(mode == "kgtopounds"){
+			 document.getElementById("answer").innerHTML = weight * 2.20462262 + " lb";
+		}
+		else{
+			document.getElementById("answer").innerHTML = weight * 0.45359237 + " kg";
+		}
+      }
+      // (9) ==================================
+      var myVar;
+      function startClock() {
+		var d = new Date();
+		var ampm;
+		var text = "";
+
+		if(d.getHours()>=12){
+			ampm = "오후"
+		}
+		else{
+			ampm = "오전"
+		}
+		text = ampm + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+		document.getElementById("clock").innerHTML = text;
+      }
+</script> </head>
+  <body onload="startClock()">
+    <p><b> (1) When the input field gets focus, background-color change into
+        yellow and return to white when blurred. <br>
+        Enter your name: First <input onfocus="myFocus(this)" onblur="myBlur(this)"
+
+          type="text"> Last <input onfocus="myFocus(this)" onblur="myBlur(this)"
+
+          type="text"> </b></p>
+    <hr> <b> (2) </b> <img src="http://www.w3schools.com/js/bulboff.gif" id="mybolb"
+
+      height="70" width="40"> <input onclick="lightSwitch()" value="Switch" type="button">
+    &nbsp;<strong> (Hint: bulbon image is at
+      http://www.w3schools.com/js/bulbon.gif) </strong>
+    <hr> <b> (3) </b>
+    <div id="testArea" style="width:100; height:60; border:1px solid;"> <b>
+        Select Text Color </b> <input name="color" onchange="myText(this)" type="color">
+      : <b><span id="textColor"> </span></b> <br>
+      <b> Select Background Color </b> <input name="color" onchange="myBackground(this)"
+
+        type="color"> : <b><span id="bgColor"> </span></b> <br>
+    </div>
+    <hr> <b> (4) Lotto Number (6 numbers between 1 and 45) generator : </b> <input
+
+      value="Good Luck!" onclick="myLotto()" type="button">&nbsp; <strong>(Hint:
+      Math.random()) </strong><b><span id="lotto"> </span></b>
+    <hr> <b> (5) </b>
+    <span onmouseover="mOver(this)" onmouseout="mOut(this)" style="background-color:lightpink; width:150px; height:20px; padding:5px; ">
+      <b>Mouse Over Me</b></span>
+    <hr>
+    <p><b> (6) Tip Calculator : $ Subtotal : <input id="subtotal" type="text">
+        &nbsp; %Tip : <input id="tip" type="text"> &nbsp;</b> <input id="calculate"
+
+        value="Calulate" onclick="calculate();" type="button">&nbsp; Your total
+      :<span id="total"> $0.00</span> &nbsp; &nbsp;<strong> (Hint: parseFloat())
+      </strong></p>
+    <hr>
+    <p><b> (7) Alarm : <input id="sec" size="6" type="text"> sec </b> <input
+
+        id="go" value="Go" onclick="tick();" type="button">&nbsp;&nbsp;&nbsp;&nbsp;
+      <strong>(Hint: parseInt())</strong></p>
+    <hr>
+    <p><b>(8) <b> Convert <input id="weight" size="6" type="text">
+          <select id="convert">
+            <option value="kgtopounds">kg to lb</option>
+            <option value="poundstokg">lb to kg</option>
+          </select>
+          <button id="calculate" onclick="convert()">Calculate</button>&nbsp;&nbsp;&nbsp;&nbsp;<strong>
+            <span id="answer"> </span> </strong></b><strong> (Hint: lb = kg *
+          2.20462262, kg = lb * 0.45359237)</strong> </b></p>
+    <hr><b>
+    <p><b> (9) Digital Clock : </b> <button onclick="myVar = setInterval(startClock,500);"> Start clock</button> &nbsp;
+        <span id="clock">  </span>
+        <b><button onclick="clearInterval(myVar);">Stop clock</button>&nbsp; <br>
+        </b></p>
+      <hr> </b>
+  </body>
+</html>
