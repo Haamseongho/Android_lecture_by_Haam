@@ -11,17 +11,17 @@
 4. 리소스 / 스타일 / 테마
 5. 프로그래스바 / 시크바
 
-17.07.03 – 17.07.09[ 1주차 ]
-1. Content Provider 활용
-2. BroadCastReceiver 활용
-3. Service 활용  Background 정리
-4. SurfaceView 활용 그림판 앱 예제 정리 { Thread , Handler , Bitmap … }
+* 17.07.03 – 17.07.09[ 1주차 ]
+  * Content Provider 활용
+  * BroadCastReceiver 활용
+  * Service 활용  Background 정리
+  * SurfaceView 활용 그림판 앱 예제 정리 { Thread , Handler , Bitmap … }
 
-17.07.10 – 17.07.16 [ 2주차 ]
-1. RecyclerView / CardView 
-2. Pallete 활용
-3. NotificationCompat 활용
-4. Nine-patch 활용
+*** 17.07.10 – 17.07.16 [ 2주차 ]
+ ** RecyclerView / CardView 
+ ** Pallete 활용
+ ** NotificationCompat 활용
+ ** Nine-patch 활용
 
 17.07.17 – 17.07.23 [ 3주차 ] 
 1. MVP , MVVM 설계 방식
