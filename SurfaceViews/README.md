@@ -1,7 +1,8 @@
-#SurfaceView
+# SurfaceView
+
 ### 1. 개념설명
 
->SurfaceView는 왜 사용하는가?
+> SurfaceView는 왜 사용하는가?
 <hr />
 - 메인 스레드에서 뷰를 구현하는 것이 아니라 외부 스레드에서 구현 한 뒤 메인 스레드에 붙이기 때문에 속도가 빠르다.
 - 그림을 그릴 때에 onDraw()나 invalidate() 메소드를 사용하지 
@@ -15,16 +16,16 @@
 <br />
 > SurfaceView 사용 시 알야아 할 핵심 기능
 <hr />
-1. ##SurfaceHolder 
+## 1. SurfaceHolder 
    * SurfaceView를 관리하는 홀더 / 제어 기능 
    * getHolder()로 불러 온 뒤 작업 한다.
 
 
-2. ##Callback
+## 2. Callback
    * SurfaceView는 기존 안드로이드 View와는 다르게 구현되기 때문에 이를 총괄하는데 쓰이는 기능이다.
    * 홀더가 서피스뷰를 관리하기 때문에 홀더에 콜백을 붙이는 것이고 상태를 제어하기 때문에 서피스뷰에 관한 상태 메소드를 구현 해야 한다.
    
-3. ##LockCanvas(null) & unlockCanvasAndPost(canvas); 
+## 3. LockCanvas(null) & unlockCanvasAndPost(canvas); 
    * 서피스 뷰가 기존 안드로이드 뷰가 아닌 다른 뷰에서 구현한다는 특징을 제대로 살린 것 중 하나이다.
    * 뷰에 대한 프로세스를 독점하여 작업할 수 있기 때문에 
 기아 상태나 DeadLock이 발생하지 않는다.
@@ -87,9 +88,9 @@
 
 ```
 
-1. surfaceView 생성시 --> 스레드 시작 (독점하기 위함)
-2. surfaceChanged 
-3. surfaceView가 제거될 경우 --> 스레드 인터럽트 걸기
+1.  surfaceView 생성시 --> 스레드 시작 (독점하기 위함)
+2.  surfaceChanged 
+3.  surfaceView가 제거될 경우 --> 스레드 인터럽트 걸기
 
 
 ```
@@ -200,7 +201,7 @@ Ball이라는 클래스 내의 draw를 호출하여 그림을 그린다. <이게
 
 <br />
 
-###3. CustomView를 활용한다면? 
+### 3. CustomView를 활용한다면? 
 
 ------
 
