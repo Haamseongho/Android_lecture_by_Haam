@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.haams.surfaceviews.MainActivity">
+
+    <com.example.haams.surfaceviews.MyView
+        android:id="@+id/myView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+<!--
+  MyView를 커스텀 뷰로 정의해서 둔 경우는 MyView에서 모든 게 구현 됩니다.
+ SurfaceView와 다른 점은 onDraw() 그리고 invalidate()를 활용해서 그림을 그릴 수 있다는 점입니다.
+ 요즘 나오는 휴대폰 기종은 기능이 좋기 때문에 기존에 기본 뷰에서 보다 SurfaceView를 활용하여
+ 빠르게 뷰를 구현했던 이점이 많이 상실되었습니다.
+ 따라서 커스텀 뷰를 활용한 뷰 구현을 주로 사용하시면 좋을 듯 싶습니다.
+ 그래도 동영상이나 용량이 큰 내용물을 돌릴 경우에 스레드를 활용한
+ 서피스뷰를 사용한다면 이점이 있을 겁니다.
+-->
+</LinearLayout>
