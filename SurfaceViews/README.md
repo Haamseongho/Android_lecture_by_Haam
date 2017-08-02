@@ -16,9 +16,10 @@
 <br />
 > SurfaceView 사용 시 알야아 할 핵심 기능
 <hr />
+
 ## 1. SurfaceHolder 
-   * SurfaceView를 관리하는 홀더 / 제어 기능 
-   * getHolder()로 불러 온 뒤 작업 한다.
+    * SurfaceView를 관리하는 홀더 / 제어 기능 
+    * getHolder()로 불러 온 뒤 작업 한다.
 
 
 ## 2. Callback
