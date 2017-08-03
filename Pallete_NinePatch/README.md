@@ -2,7 +2,7 @@
 <hr />
 <br />
 <br />
-## NinePatch 
+# NinePatch 
 ---
 ### 1. 개념설명
 
@@ -82,22 +82,124 @@
 <br />
 
 
-## Palette
+# Palette
 ---
 
  > <a href="https://developer.android.com/reference/android/support/v7/graphics/Palette.html" > Palette 설명  (개발자 사이트 참조)</a> 
 
 
+>### Palette 개념  
+> - 동기적 vs 비동기적 구현 
+> > 동기적 
+     :  메인Thread의 성능에 영향을 줄 수 있기 때문에 백그라운드에서 사용되어야 한다.
+
+     ``` 
+         Palette p = Palette.from(bitmap).generate();
+
+     ```
+> > 비동기적 
+    :  함수가 작동할 경우 바로 진행되기 때문에 메인Thread에 영향을 적게 준다. (추천)
+
+   ```
+	
+	  Palette.from(bitmap).generate(new PaletteAsyncListener() {
+     			public void onGenerated(Palette p) {
+        		 // Use generated instance
+     		 }
+ 		 });
 
 
+   ```
 
+> Glide와 연동한 Palette
+  
+   
+ ```       
+       
+     Glide.with(this).asBitmap()
+                .load(R.drawable.kakao)
+                .into(new BitmapImageViewTarget(mImage) {
+                    @Override
+                    public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
+                        super.onResourceReady(resource, transition);
+
+                        AsyncTask<Bitmap, Void, Palette> palette = Palette.from(resource).generate(new Palette.PaletteAsyncListener() {
+                            @Override
+                            public void onGenerated(Palette palette) {
+                                setPalette(palette);
+                              }
+                         });
+ 
+                      }
+                   });
+       }
+
+
+ ``` 
+### Swatch 
+
+1. Palette가 가지고 있는 유용한 색상 값들을 불러 온다.
+
+   - Vibrant
+   - Vibrant dark
+   - Vibrant light       
+  (진한 느낌)
+   - Muted
+   - Muted dark
+   - Muted light   
+  (옅은 느낌)  
+ <br />
+
+2. Palette나 Swatch는 null로 올 가능성이 있기 때문에 null 체크를 반드시 해줘야 한다. (아래 코드처럼)
+ <br />
+
+3. Swatch에서 많이 쓰는 함수 
+    - getRgb() : Vibrant로 설정할 경우 이미지에 해당하는 RGB색상 값을 가지고 온다.
+    - getTitleTextColor() : 위의 RGB색상값에 잘 어울리는 제목 색상값을 가지고 온다.
+    - getBodyTextColor() : 위의 RGB색상값에 잘 어울리는 본문 색상값을 가지고 온다.
+
+ ```
+
+    private void setPalette(Palette palette) {
+        if (palette == null)
+            return;
+
+        Palette.Swatch vibrantSwatch = palette.getVibrantSwatch();
+
+        if (vibrantSwatch != null) {
+            color1.setBackgroundColor(vibrantSwatch.getRgb());
+            colorText1.setTextColor(vibrantSwatch.getTitleTextColor());
+        }
+
+        Palette.Swatch darkVibrantSwatch = palette.getDarkVibrantSwatch();
+        if (darkVibrantSwatch != null) {
+            color2.setBackgroundColor(darkVibrantSwatch.getRgb());
+            colorText2.setTextColor(darkVibrantSwatch.getBodyTextColor());
+        }
+
+
+        Palette.Swatch lightVibrantSwatch = palette.getLightVibrantSwatch();
+        if (darkVibrantSwatch != null) {
+            color3.setBackgroundColor(lightVibrantSwatch.getRgb());
+            colorText3.setTextColor(lightVibrantSwatch.getBodyTextColor());
+        }
+
+        Palette.Swatch mutedSwatch = palette.getMutedSwatch();
+        if (mutedSwatch != null) {
+            color4.setBackgroundColor(mutedSwatch.getRgb());
+            colorText4.setTextColor(mutedSwatch.getTitleTextColor());
+        }
+
+    }
+
+ ```
 <br />
 
 
-## ButterKnife 
+# ButterKnife 
 ----
 
-## 1. 사용법 
+## ButterKnife 사용법 
 > Build.graddle (Module:app) 에 추가 
 
 ```
@@ -148,3 +250,23 @@
 ```
 
 - @OnClick으로 아이디 값을 넘겨 준다. (해당 위젯들에 대한 클릭리스너) 
+
+: ButterKnife는 뷰를 바인딩 한 뒤 해당 액티비티에서 사용하겠다고 바인드 선언을 하는 것이 중요하다. 
+
+~~~
+
+
+    @Override
+       protected void onCreate(Bundle savedInstanceState) {
+           super.onCreate(savedInstanceState);
+           setContentView(R.layout.activity_main);
+           ButterKnife.bind(this);
+           // 반드시 현 액티비티에서 바인딩 하겠다고 정의해야함!
+           bindViews();
+
+    }
+
+~~~
+
+
+
