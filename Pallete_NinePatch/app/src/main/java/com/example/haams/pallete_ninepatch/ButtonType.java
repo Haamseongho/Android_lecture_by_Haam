@@ -16,9 +16,9 @@ import android.widget.Button;
 
 public class ButtonType extends Button {
 
-    private Paint paint;
-    private Canvas canvas;
-    private static final String TAG = "ButtonType";
+        private Paint paint;
+        private Canvas canvas;
+        private static final String TAG = "ButtonType";
 
     public ButtonType(Context context) {
         super(context);
