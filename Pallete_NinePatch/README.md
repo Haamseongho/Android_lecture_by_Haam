@@ -2,15 +2,17 @@
 <hr />
 <br />
 <br />
-<<<<<<< HEAD
+
 # NinePatch 
 ---
-=======
+
 
 ## NinePatch 
 
 
->>>>>>> b6cdf3068d8f2ff90d08cada70931d95a779bc15
+# NinePatch 
+---
+
 ### 1. 개념설명
 
 > NinePatch 는 왜 쓸까요?
