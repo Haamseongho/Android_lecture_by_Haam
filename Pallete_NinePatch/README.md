@@ -1,7 +1,6 @@
 ># NinePatch & Palette 
 <hr />
 <br />
-<br />
 
 #  NinePatch 
 ---
