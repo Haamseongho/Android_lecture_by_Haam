@@ -1,19 +1,11 @@
 ># NinePatch & Palette 
 <hr />
 <br />
-<br />
 
-# NinePatch 
+#  NinePatch 
 ---
 
-
-## NinePatch 
-
-
-# NinePatch 
----
-
-### 1. 개념설명
+###  1. 개념설명
 
 > NinePatch 는 왜 쓸까요?
 <hr />
