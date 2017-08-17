@@ -2,6 +2,7 @@ package com.example.haams.pallete_ninepatch;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -59,50 +60,56 @@ public class MainActivity extends AppCompatActivity {
 
         Glide.with(this).asBitmap()
                 .load(R.drawable.kakao)
-                .into(new BitmapImageViewTarget(mImage){
+                .into(new BitmapImageViewTarget(mImage) {
                     @Override
                     public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
                         super.onResourceReady(resource, transition);
 
-                        Palette palette = Palette.from(resource).generate();
-                        setPalette(palette);
+                        AsyncTask<Bitmap, Void, Palette> palette = Palette.from(resource).generate(new Palette.PaletteAsyncListener() {
+                            @Override
+                            public void onGenerated(Palette palette) {
+                                setPalette(palette);
+                            }
+                        });
+
                     }
                 });
     }
 
     private void setPalette(Palette palette) {
-        if(palette == null)
+        if (palette == null)
             return;
 
         Palette.Swatch vibrantSwatch = palette.getVibrantSwatch();
 
-        if(vibrantSwatch!=null){
+        if (vibrantSwatch != null) {
             color1.setBackgroundColor(vibrantSwatch.getRgb());
             colorText1.setTextColor(vibrantSwatch.getTitleTextColor());
         }
 
         Palette.Swatch darkVibrantSwatch = palette.getDarkVibrantSwatch();
-        if(darkVibrantSwatch != null){
+        if (darkVibrantSwatch != null) {
             color2.setBackgroundColor(darkVibrantSwatch.getRgb());
             colorText2.setTextColor(darkVibrantSwatch.getBodyTextColor());
         }
 
 
         Palette.Swatch lightVibrantSwatch = palette.getLightVibrantSwatch();
-        if(darkVibrantSwatch != null){
+        if (darkVibrantSwatch != null) {
             color3.setBackgroundColor(lightVibrantSwatch.getRgb());
             colorText3.setTextColor(lightVibrantSwatch.getBodyTextColor());
         }
 
         Palette.Swatch mutedSwatch = palette.getMutedSwatch();
-        if(mutedSwatch!=null){
+        if (mutedSwatch != null) {
             color4.setBackgroundColor(mutedSwatch.getRgb());
             colorText4.setTextColor(mutedSwatch.getTitleTextColor());
         }
 
     }
-    @OnClick({R.id.color1,R.id.color2,R.id.color3,R.id.color4})
-    public void moveIntent(View view){
-        startActivity(new Intent(MainActivity.this,SubActivity.class));
+
+    @OnClick({R.id.color1, R.id.color2, R.id.color3, R.id.color4})
+    public void moveIntent(View view) {
+        startActivity(new Intent(MainActivity.this, SubActivity.class));
     }
 }

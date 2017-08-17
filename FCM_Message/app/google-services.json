@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "908555044426",
+    "firebase_url": "https://fcmtest-b9a59.firebaseio.com",
+    "project_id": "fcmtest-b9a59",
+    "storage_bucket": "fcmtest-b9a59.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:908555044426:android:5e0df46c1cf1417b",
+        "android_client_info": {
+          "package_name": "com.example.haams.fcm_message"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "908555044426-teo9l07a4khnvrug05qhs43tleujns3c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6QIxY3XCrx5Wpf9pv_Q138FXBzfVyU6I"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
