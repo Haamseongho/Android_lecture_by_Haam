@@ -249,9 +249,11 @@ Manifest.xml 내의 application 태그 내에 위와 같이 파이어베이스 �
 
 <br />
 
-	<img src="./images/Fcm8.jpg" />
+<hr />
+
+<img src="./images/Fcm8.jpg" />
 	
-	
+<hr />
 
 위와 같이 메세지 변수를 정의하고 
 to 부분에는 아까 받은 토큰 값을 넣어 주고 notification과 data를 정의해준다. 
