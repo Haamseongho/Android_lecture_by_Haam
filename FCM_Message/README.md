@@ -22,7 +22,10 @@
 
 1. Firebase 사이트에 들어가서 프로젝트를 만든다.
 <br />
+
 <a link="https://console.firebase.google.com/?hl=ko">[ Firebase Site ]</a>
+
+
 2. 프로젝트 생성 이 후에는 안드로이드 앱을 등록하도록 하는데 SHA 인증서를 받는 작업과 안드로이드 패키지를 추가하는 작업을 해줘야 합니다.
 
 <br />
