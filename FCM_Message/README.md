@@ -22,18 +22,21 @@
 
 1. Firebase 사이트에 들어가서 프로젝트를 만든다.
 <br />
-<a link="https://console.firebase.google.com/?hl=ko">[ Firebase Site ]</a>
+
+<a href="https://console.firebase.google.com/?hl=ko">[ Firebase Site ]</a>
+
+
 2. 프로젝트 생성 이 후에는 안드로이드 앱을 등록하도록 하는데 SHA 인증서를 받는 작업과 안드로이드 패키지를 추가하는 작업을 해줘야 합니다.
 
 <br />
 
-<img src="./images/fcm1.jpg" />
+<img src="./images/fcm1.JPG" />
 
 ---
 
-3.안드로이드 프로젝트를 만든 다음에 Manifest.xml에서 패키지를 가지고 와서 패키지를 등록해서 앱을 생성한다.
+3. 안드로이드 프로젝트를 만든 다음에 Manifest.xml에서 패키지를 가지고 와서 패키지를 등록해서 앱을 생성한다.
 
-4.안드로이드 등록을 하면서 패키지를 등록하면 그 다음에는 닉네임 설정과 암호화된 키를 등록하는 차례인데, SHA-1 or SHA-256 둘 중 하나를 등록해주면 됩니다.
+4. 안드로이드 등록을 하면서 패키지를 등록하면 그 다음에는 닉네임 설정과 암호화된 키를 등록하는 차례인데, SHA-1 or SHA-256 둘 중 하나를 등록해주면 됩니다.
 
 <방법> 
 [Window]
@@ -45,7 +48,7 @@ keytool -list -v -keystore debug.keystore 입력한다.
 
 <br />
 
-<img src="./images/Fcm2.jpg" /> 
+<img src="./images/Fcm2.JPG" /> 
 
 
 위와 같은 그림이 나오게 되면 여기서 SHA-1 또는 SHA-256 인증서 지문을 가지고와서 앱에 등록시킨다.
@@ -54,26 +57,26 @@ Package.json을 다운 받을 수 있게 되면 다운 받은 뒤 아래 그림�
 
 <br />
 
-<img src="./images/Fcm3.jpg" />
+<img src="./images/Fcm3.JPG" />
 
 Package.json에는 파이어베이스 내에 정리한 안드로이드 정보가 정리되어 있다. (클라이언트 ID , api-key , Package name ... )
 
-5.아래 그림 처럼 build.graddle(project..) 에 등록해 준다.
+5. 아래 그림 처럼 build.graddle(project..) 에 등록해 준다.
 
 <br />
 
-<img src="./images/Fcm4.jpg" />
+<img src="./images/Fcm4.JPG" />
 
 ( google에 관련된 내용 적어주기 )
 
-6.build.graddle(Module..)의 dependencies에 컴파일 해주기 
+6. build.graddle(Module..)의 dependencies에 컴파일 해주기 
 
 <br />
 
-<img src="./images/Fcm5.jpg"/>
+<img src="./images/Fcm5.JPG"/>
 
 
-7.Manifest에 정리를 해줘야 하는데 이 부분이 가장 중요하다. 
+7. Manifest에 정리를 해줘야 하는데 이 부분이 가장 중요하다. 
 에러가 나거나 뭔가 진행이 잘 안될 때 주로 Manifest.xml이 잘못된 경우가 많았다.
 
 
@@ -198,7 +201,7 @@ Manifest.xml 내의 application 태그 내에 위와 같이 파이어베이스 �
 
 ---
 
-8.서버 파트 
+8. 서버 파트 
 
 ( 패키지 설치 )
 > npm install fcm-node --save 
@@ -238,7 +241,7 @@ Manifest.xml 내의 application 태그 내에 위와 같이 파이어베이스 �
 
 <br />
 
-<img src="./images/Fcm7.jpg"/>
+<img src="./images/Fcm7.JPG"/>
 
 위와 같이 설정 부분에 클라우드 메시징에 들어가면 서버 키가 정의되어 있습니다.
 
@@ -246,7 +249,11 @@ Manifest.xml 내의 application 태그 내에 위와 같이 파이어베이스 �
 
 <br />
 
-<img src="./images/Fcm8.jpg" />
+<hr />
+
+<img src="./images/Fcm8.JPG" />
+	
+<hr />
 
 위와 같이 메세지 변수를 정의하고 
 to 부분에는 아까 받은 토큰 값을 넣어 주고 notification과 data를 정의해준다. 
