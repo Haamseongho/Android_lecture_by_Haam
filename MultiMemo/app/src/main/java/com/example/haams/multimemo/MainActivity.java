@@ -32,6 +32,8 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.ImageViewTarget;
+import com.example.haams.multimemo.items.Memo;
+import com.example.haams.multimemo.server.Network;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -44,6 +46,9 @@ import java.util.Date;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -68,10 +73,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         ButterKnife.bind(this);
         initViews();
-        dbHelper = new DBHelper(this, "memoDB", null, 1);
-
     }
 
     private void initViews() {
@@ -88,8 +92,9 @@ public class MainActivity extends AppCompatActivity {
                 clkPhotos();
                 break;
             case R.id.btnUpload:
+                dbHelper = new DBHelper(this, "memoTable", null, 1);
                 sendDataToSqlite();
-                sendDataToServer();
+               // sendDataToServer();
                 break;
 
         }
@@ -127,15 +132,34 @@ public class MainActivity extends AppCompatActivity {
 
     private void sendDataToSqlite() {
         if (index == 0) {
-            dbHelper.insertOnlyMemo(edtTitle.getText().toString(), edtMemo.getText().toString());
+            dbHelper.insertOnlyMemo(edtTitle.getText().toString()+"=", edtMemo.getText().toString()+"=");
         } else {
-            dbHelper.insertMemoWithImage(edtTitle.getText().toString(), edtMemo.getText().toString(), imgPath);
+            dbHelper.insertMemoWithImage(edtTitle.getText().toString()+"=", edtMemo.getText().toString()+"=", imgPath+"=");
             Log.i(TAG, "db saved well");
             Log.i(TAG, dbHelper.getMemoAllThings(edtTitle.getText().toString()));
         }
+        startActivity(new Intent(MainActivity.this,MemoActivity.class));
     }
 
     private void sendDataToServer() {
+        Network network = Network.getNetworkInstance();
+        network.getFileProxy().uploadFileToServer(edtTitle.getText().toString(),
+                edtMemo.getText().toString(), imgPath, new Callback<Memo>() {
+                    @Override
+                    public void onResponse(Call<Memo> call, Response<Memo> response) {
+                        if(response.isSuccessful()){
+                            Log.i(TAG,"파일 서버 전송 완료");
+                            startActivity(new Intent(MainActivity.this,MemoActivity.class));
+                            finish();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Memo> call, Throwable t) {
+                        Log.e(TAG,t.toString());
+                        // 서버 전송 실패
+                    }
+                });
     }
 
 

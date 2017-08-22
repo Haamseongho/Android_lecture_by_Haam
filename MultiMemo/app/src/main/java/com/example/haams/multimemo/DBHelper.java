@@ -11,7 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 
 public class DBHelper extends SQLiteOpenHelper {
-    private static String createSQL = "CREATE TABLE memoTable (_id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, memo TEXT, image VARCHAr);";
+    private static String createSQL = "CREATE TABLE memoTable (_id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, memo TEXT, image VARCHAR);";
 
     public DBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
@@ -77,6 +77,18 @@ public class DBHelper extends SQLiteOpenHelper {
             result += "제목: " + cursor.getString(1) + '\n'
                     + "내용:" + cursor.getString(2) + '\n'
                     + "이미지 경로:" + cursor.getString(3) + '\n';
+        }
+        return result;
+    }
+
+    public String getMemo() {
+        SQLiteDatabase db = getReadableDatabase();
+        String result = "";
+        Cursor cursor = db.rawQuery("SELECT * FROM memoTable ", null);
+        while (cursor.moveToNext()) {
+            result += cursor.getString(1) + '='
+                    + cursor.getString(2) + '='
+                    + cursor.getString(3) + '=';
         }
         return result;
     }
