@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:id="@+id/nav_group"
+        android:checkableBehavior="none">
+        <item android:id="@+id/nav_item1" android:title="@string/nav_item_name1"
+            android:icon="@android:drawable/ic_menu_my_calendar"></item>
+        <item android:id="@+id/nav_item2" android:title="@string/nav_item_name2"
+            android:icon="@android:drawable/ic_dialog_info"></item>
+        <item android:id="@+id/nav_item3" android:title="@string/nav_item_name3"
+            android:icon="@android:drawable/sym_action_call"></item>
+        <item android:id="@+id/nav_item4" android:title="@string/nav_item_name4"
+            android:icon="@android:drawable/ic_menu_manage"></item>
+    </group>
+</menu>

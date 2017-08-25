@@ -1,4 +1,4 @@
-package com.example.haams.multimemo;
+package com.example.haams.multimemo.database;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -84,11 +84,9 @@ public class DBHelper extends SQLiteOpenHelper {
     public String getMemo() {
         SQLiteDatabase db = getReadableDatabase();
         String result = "";
-        Cursor cursor = db.rawQuery("SELECT * FROM memoTable ", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM memoTable", null);
         while (cursor.moveToNext()) {
-            result += cursor.getString(1) + '='
-                    + cursor.getString(2) + '='
-                    + cursor.getString(3) + '=';
+            result += cursor.getString(1) + "=" + cursor.getString(2) + "=" + cursor.getString(3) + "=";
         }
         return result;
     }
