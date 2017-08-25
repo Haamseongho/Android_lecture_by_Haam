@@ -163,3 +163,228 @@ Shadow : 그림자 두는 속성
 ---
 : AppBarLayout 바로 아래의 자식 요소로 AppBar의 확대 및 축소 표시를 위한 Toolbar의 wrapper
 
+
+# DrawerLayout & NavigationView 
+
+---
+
+## NavigationView
+- Navigation Drawer를 구현할 수 있는 뷰
+- 액션바 안의 아이콘 (액션바토글) 또는 스와이프 동작으로 드로어 표시 가능
+- 메뉴와 서브 콘텐츠를 딱 맞게 넣을 수 있음
+
+NavigationView는 부분별 레이아웃 분리와 아이템 배치로 더 쉽게 구현할 수 있게 되었습니다.
+
+
+### [ 전체 코드로 확인 ] 
+
+```
+
+	<?xml version="1.0" encoding="utf-8"?>
+	<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    	xmlns:app="http://schemas.android.com/apk/res-auto"
+    	xmlns:tools="http://schemas.android.com/tools"
+    	android:id="@+id/drawer"
+    	android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+    	android:fitsSystemWindows="true"
+    	tools:context="com.example.haams.material_design.MainActivity">
+
+
+
+```
+
+전체를 DrawerLayout으로 묶어준다. 
+기본적으로 서랍장이 닫히기 전 안에 내용물들을 담는 부분입니다. 
+(스와이프 또는 토글버튼 선택으로 서랍장이 열리기 전 전체 스탠다드 페이지를 구성하는 부분)
+
+```
+
+	  <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            android:minHeight="50dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+
+
+```
+
+CoordinatorLayout으로 그 다음 부터 전체 틀을 묶어 줍니다.
+
+이 안에 AppBarLayout을 두는데, AppBarLayout 내의 내용물들은 위 AppBarLayout 설명과 같이 액션을 줄 수 있습니다.
+
+```
+
+	 	<android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/col_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fitsSystemWindows="true"
+                android:minHeight="50dp"
+                app:contentScrim="?attr/colorPrimary"
+                app:layout_collapseMode="parallax"
+                app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
+
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/main_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
+                    app:layout_collapseMode="parallax"
+                    app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
+                    app:popupTheme="@style/Theme.Design.Light">
+
+
+                </android.support.v7.widget.Toolbar>
+            </android.support.design.widget.CollapsingToolbarLayout>
+
+
+
+```
+
+위는 AppBarLayout 내의 내용물입니다.
+CollapsingToolbarLayout으로  AppBar의 확대 및 축소를 다룰 수 있고 그 내부의 Toolbar를 자유자재로 가지고 놀 수 있습니다.
+
+그 속성으로는 
+> app:layout_collapseMode="parallax" 
+> > 시간차이로 붕괴되는 현상 
+
+> app:layout_collapseMode="pin" 
+> > 맨 위에 고정시키는 현상 (스크롤 시에)
+
+> layout_scrollFlags : 스크롤 시에 주는 Animation
+
+AppBar를 스크롤 시에 CollapsingToolbarLayout은 시간차로 붕괴되며 아래로 스크롤 시 다시 AppBar가 나오게 된다.
+내부 Toolbar또한 시간차로 붕괴되기 시작하며 아래로 스크롤 시 AppBar가 사라지며 최종적으론 보이지 않는다. 
+
+```
+
+	
+            <android.support.design.widget.TabLayout
+                android:id="@+id/main_tablayout"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_gravity="bottom"></android.support.design.widget.TabLayout>
+
+        </android.support.design.widget.AppBarLayout>
+
+
+```
+
+CollapsingToolBarLayout 바깥쪽에 TabLayout을 두면서 
+툴바 내에 붕괴되는 것과는 별개로 돌아가도록 진행한다.
+단 AppBarLayout에 같이 두고 위와 같은 속성을 주지 않음으로써 최종적으론 AppBar내에 탭레이아웃만 남도록 정리한다.
+
+CoordinatorLayout이 끝난 다음에 NavigationView를 설정합니다.
+
+```
+
+	
+    <android.support.design.widget.NavigationView
+        android:id="@+id/main_nav"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/nav_menu"></android.support.design.widget.NavigationView>
+
+
+```
+
+Drawer가 닫힌 상태에서는 CoordinatorLayout 부분 까지 표현되는 것이고 Drawer가 열릴 경우 NavigationView가 보여지게 되는 것입니다.
+
+## NavigationView 활용
+
+### ★ NavigationView를 사용하기 위해선 주의해야할 점 3가지만 알고 가시면 됩니다.
+
+
+1. 슬라이딩 메뉴로 표시되는 페이지로 header와 contents부분으로 나뉩니다. 
+header는 별개의 layout이 필요하고 contents는 menu가 필요합니다.
+
+2. NavigationView를 자바에서 사용할 때에 해당 아이템을 가지고 표현하는 것은 contents부분에 설정한 메뉴아이템을 가지고 오는 것이라 생각하시면 됩니다.
+
+3. NavigationView의 아이템이 메뉴에 관련된 아이템들이기 때문에 원래 가지고 있는 menu의 menuItem들과 구분을 지어야 합니다. 
+
+
+---
+
+## *1* . 정리
+NavigationView 태그로 선언된 xml 부분에서 app:headerLayout 이 부분에 주목합니다.
+
+이 부분은 별개의 xml파일을 만들어 header부분에 어떠한 이미지가 들어갈 지 정리한 부분입니다. 
+
+app:menu 부분에서는 슬라이딩 메뉴에 어떠한 메뉴 아이템들이 들어갈 지 정리한 부분입니다.
+
+---
+## *2* 정리
+
+```
+
+	<?xml version="1.0" encoding="utf-8"?>
+	<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    	<item android:title="위치 알림 정하기"
+        	android:id="@+id/spot_item"
+       	 	android:icon="@android:drawable/ic_lock_idle_alarm"></item>
+	</menu>
+
+
+```
+
+위와 같이 간단한 메뉴를 만들어서 호출하면 됩니다.
+
+---
+
+### *3* 정리
+
+
+```
+
+
+	@Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (menuIndex) {
+            case 0:
+                switch (item.getItemId()) {
+                    case R.id.alarm_item:
+                        Toast.makeText(MainActivity.this, "일정 알람 선택", Toast.LENGTH_LONG).show();
+                        subMenuIndex = 1;
+                        break;
+                }
+                break;
+            case 1:
+                switch (item.getItemId()) {
+                    case R.id.spot_item:
+                        Toast.makeText(MainActivity.this, "장소 알람 선택", Toast.LENGTH_LONG).show();
+                        subMenuIndex = 2;
+                        break;
+
+                }
+                break;
+
+            case 2:
+                switch (item.getItemId()) {
+                    case R.id.chat_item:
+                        Toast.makeText(MainActivity.this, "채팅 알람 선택", Toast.LENGTH_LONG).show();
+                        subMenuIndex = 3;
+                        break;
+                }
+                break;
+        }
+        if (mainDrawerToggle.onOptionsItemSelected(item))
+            return true;
+        return super.onOptionsItemSelected(item);
+    }
+
+
+```
+
+옵션 아이템 선택 메소드 부분에서 mainDrawerToggle (네비게이션뷰 호출 아이콘) 선택 시 true 값을 반환한다고 표시하면 됩니다.
+
+전체 코드는 MainActivity.java에 있기 때문에 확인하시길 바랍니다. 

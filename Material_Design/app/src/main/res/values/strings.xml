@@ -3,4 +3,10 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nav_item_name1">NavigationView_item1</string>
+    <string name="nav_item_name2">NavigationView_item2</string>
+    <string name="nav_item_name3">NavigationView_item3</string>
+    <string name="nav_item_name4">NavigationView_item4</string>
+    <string name="drawer_open">Drawer is opened</string>
+    <string name="drawer_close">Drawer is closed</string>
 </resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="위치 알림 정하기"
+        android:id="@+id/spot_item"
+        android:icon="@android:drawable/ic_lock_idle_alarm"></item>
+</menu>
